@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #666;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 18px
+}
+
+h3 {
+    font-size: 14px
+}
+
+h3:after {
+    border-bottom: 1px solid #e0e0e0;
+    content: "";
+    display: block;
+    padding-bottom: 14px
+}
+
+.header li,
+#cart li div {
+    width: 30%;
+    float: left;
+}
+.adsDetails{
+    padding: 20px 0;
+    float: left;
+    width: 100%
+}
+.adsDetails:hover{background: #eee}
+.clearfix: after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    display: inline - block;
+}
+
+
+/* Hides from IE-mac \*/
+
+* html.clearfix {
+    height: 1 %;
+}
+
+.clearfix {
+    display: block;
+}
+
+
+/* End hide from IE-mac */
+
+input[type="button"],
+input[type="submit"]{
+    padding: 0 4px;
+}
+
+input[type="text"]{
+    padding: 0 10px;
+    text-align: center;
+}

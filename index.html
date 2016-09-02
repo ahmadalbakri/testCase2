@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Seek International Test</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script>var company = { "id": 3 }</script>
+
+    <script src="model/data.js"></script>
+    <script src="model/settings.js"></script>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="js/behaviour.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Seek Checkout System for <span id="companyName"></span></h1>
+            <hr>
+            <ul id="cart" class="clearfix">
+                <ul class="header clearfix">
+                    <li>
+                        <h4>Type</h4></li>
+                    <li>
+                        <h4>Price</h4></li>
+                </ul>
+            </ul>
+            <hr>
+            <!-- <div id="output">
+                <h4>Confirm</h4>
+            </div> -->
+            <input type="submit" onclick="d.total();" value="Checkout">
+        </div>
+    </div>
+</body>
+
+</html>
