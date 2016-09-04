@@ -27,7 +27,9 @@ h3:after {
     padding-bottom: 14px
 }
 
-.header li,
+#cart, 
+#cart ul{overflow: hidden;}
+#cart ul li,
 #cart li div {
     width: 30%;
     float: left;
@@ -37,32 +39,7 @@ h3:after {
     float: left;
     width: 100%
 }
-.adsDetails:hover{background: #eee}
-.clearfix: after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-.clearfix {
-    display: inline - block;
-}
-
-
-/* Hides from IE-mac \*/
-
-* html.clearfix {
-    height: 1 %;
-}
-
-.clearfix {
-    display: block;
-}
-
-
-/* End hide from IE-mac */
+li.adsDetails:hover{background: #eee}
 
 input[type="button"],
 input[type="submit"]{

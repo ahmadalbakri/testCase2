@@ -5,37 +5,80 @@
     <title>Seek International Test</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
-
-    <script>var company = { "id": 3 }</script>
-
+    <script>
+    var company = {
+        "id": 1
+    }
+    </script>
     <script src="model/data.js"></script>
-    <script src="model/settings.js"></script>
-
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="js/behaviour.js"></script>
+    <script src="bower_components/vue/dist/vue.js"></script>
     <script src="js/main.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
+        <div id="app" class="row">
             <h1>Seek Checkout System for <span id="companyName"></span></h1>
-            <hr>
-            <ul id="cart" class="clearfix">
-                <ul class="header clearfix">
-                    <li>
-                        <h4>Type</h4></li>
-                    <li>
-                        <h4>Price</h4></li>
+            <div class="col-md-8">
+                <hr>
+                <ul id="cart">
+                    <ul>
+                        <li><b>Type</b></li>
+                        <li><b>Price</b></li>
+                    </ul>
+                    <!-- Loop based on basepricing - 3 package -->
+                    <li class="adsDetails" v-for="ads in data.basePricing">
+                        <div>{{ ads.title }}</div>
+                        <div>{{ ads.price }}</div>
+                        <div>
+                            <select v-model="optionSelected[$index]" @change="updateSelected($index)">
+                                <!-- Loop based on options -->
+                                <option v-for="option in data.options">
+                                    {{ option }}
+                                </option>
+                                <!-- @end Looping -->
+                            </select>
+                        </div>
+                    </li>
+                    <!-- @end Looping -->
                 </ul>
-            </ul>
-            <hr>
-            <!-- <div id="output">
-                <h4>Confirm</h4>
-            </div> -->
-            <input type="submit" onclick="d.total();" value="Checkout">
+                <hr>
+            </div>
+            <div class="col-md-4">
+                <hr>
+                <div id="output" style="display: none"><b>Selected Package / Count</b>
+                    <!-- Loop based on optionSelected -->
+                    <div class="adsDetails" track-by="$index" v-for="ads in optionSelected">
+                        {{ ads }}
+                    </div>
+                    <!-- @end Looping -->
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" onclick="d.total();" value="Checkout">
+                <pre>{{$data.optionSelected | json}}</pre>
+            </div>
         </div>
-    </div>
+        <script>
+        //var d = [{"title" : "Classic", "count" : 0}, {"title" : "Standout", "count" : 4}, {"title" : "Premium", "count" : 5}]
+        new Vue({
+            el: '#app',
+            data: {
+                optionSelected: [],
+                data
+            },
+            ready() {
+
+            },
+            methods: {
+                updateSelected(n) {
+                    console.log(n);
+                    $('#output').css('display', 'block')
+                }
+            }
+        });
+        </script>
 </body>
 
 </html>
