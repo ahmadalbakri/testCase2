@@ -2,12 +2,13 @@
 <html>
 
 <head>
-    <title>Seek International Test</title>
+    <title>Seek International Exercise</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
     <script>
     var company = {
-        "id": 1
+        "id": 1,
+        "name": "Unilever"
     }
     </script>
     <script src="model/data.js"></script>
@@ -19,9 +20,13 @@
 <body>
     <div class="container">
         <div id="app" class="row">
-            <h1>Seek Checkout System for <span id="companyName"></span></h1>
-            <div class="col-md-8">
+            <h1 class="col-md-8">Ads Checkout System : {{company.name}}<hr></h1>
+            <div class="col-md-4" id="companyDetails" v-for="ads in pricingRules">
+                <br>
+                <b>Discounted Ads </b> {{ads.type}}
                 <hr>
+            </div>
+            <div class="col-md-8">
                 <ul id="cart">
                     <ul>
                         <li><b>Type</b></li>
@@ -32,7 +37,7 @@
                         <div>{{ ads.title }}</div>
                         <div>{{ ads.price }}</div>
                         <div>
-                            <select v-model="optionSelected[$index]" @change="updateSelected($index)">
+                            <select v-model="optionSelected[$index]" @change="updateSelected($index, data.basePricing[$index].price, optionSelected)">
                                 <!-- Loop based on options -->
                                 <option v-for="option in data.options">
                                     {{ option }}
@@ -43,38 +48,46 @@
                     </li>
                     <!-- @end Looping -->
                 </ul>
-                <hr>
             </div>
-            <div class="col-md-4">
-                <hr>
-                <div id="output" style="display: none"><b>Selected Package / Count</b>
-                    <!-- Loop based on optionSelected -->
-                    <div class="adsDetails" track-by="$index" v-for="ads in optionSelected">
-                        {{ ads }}
-                    </div>
-                    <!-- @end Looping -->
+            <div id="output" style="display: none" class="col-md-4">
+                <ul>
+                    <li><b>Package Count</b></li>
+                    <li><b>Price</b></li>
+                </ul>
+                <!-- Loop based on optionSelected -->
+                <div class="adsDetails" track-by="$index" v-for="ads in optionSelected">
+                    <ul>
+                        <li>{{ ads }}</li>
+                        <li id="price{{$index}}"></li>
+                    </ul>
                 </div>
+                <!-- @end Looping -->
             </div>
-            <div class="col-md-12">
-                <input type="submit" onclick="d.total();" value="Checkout">
-                <pre>{{$data.optionSelected | json}}</pre>
+            <div class="col-md-8">&nbsp;</div>
+            <div class="col-md-4" id="total" style="display: none">
+                <input type="submit" onclick="d.total();" value="Calculate Total">
             </div>
         </div>
         <script>
-        //var d = [{"title" : "Classic", "count" : 0}, {"title" : "Standout", "count" : 4}, {"title" : "Premium", "count" : 5}]
         new Vue({
             el: '#app',
             data: {
-                optionSelected: [],
+                optionSelected: {},
+                pricingRules,
+                company,
                 data
             },
             ready() {
 
             },
             methods: {
-                updateSelected(n) {
-                    console.log(n);
-                    $('#output').css('display', 'block')
+                updateSelected(index, price, count) {
+                    // calculate price based on pricing Rules array
+                    var total = count[index] * price;
+                    finalPrice.push(total);
+
+                    $('#price' + index + '').html(total); // may not work in Firefox
+                    $('#output, #total').css('display', 'block');
                 }
             }
         });

@@ -1,41 +1,34 @@
     switch (company.id) {
         case 1:
-            name = "Unilever";
-            settings = data.settings[0];
+            settings = data.settings[0]; // Unilever
             break;
         case 2:
-            name = "Apple";
-            settings = data.settings[1];
+            settings = data.settings[1]; // Apple
             break;
         case 3:
-            name = "Nike";
-            settings = data.settings[2];
+            settings = data.settings[2]; // Nike
             break;
         case 4:
-            name = "Ford";
-            settings = data.settings[3];
+            settings = data.settings[3]; // Ford
             break;
     };
+
+    var finalPrice = [];
     var pricingRules = [];
-    // push company setting into array
-    pricingRules.push(data.settings);
+    pricingRules.push(settings); // push company setting into array
 
     function checkout(pricingRules) {
         this.add = function(item) {
                 pricingRules.push(item);
             },
             this.total = function() {
-                // logic and total calculation of the ads
-                $.each(pricingRules, function(index, value) { // var d = {"id":1, "count": 3};
-                    console.log(value);
-                });
+                // total calculation - ads up finalPrice array
+                var total = finalPrice.reduce(function(a, b) {
+                    return a + b;
+                }, 0);
+                alert(Math.floor(total));
             }
     };
 
     // Instantiate checkout
     var d = new checkout(pricingRules);
-
-    $(document).ready(function() {
-        // append company Name
-        $('#companyName').append(name);
-    });

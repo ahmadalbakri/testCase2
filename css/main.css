@@ -50,3 +50,6 @@ input[type="text"]{
     padding: 0 10px;
     text-align: center;
 }
+.spacer{margin: 0 20px}
+
+#output li{float: left; width: 50%}
